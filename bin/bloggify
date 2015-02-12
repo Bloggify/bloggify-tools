@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+var Bloggify = require("../lib");
+
+switch (process.argv[2]) {
+    case "init":
+        break;
+}
