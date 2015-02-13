@@ -52,6 +52,7 @@ function getUserConf(callback) {
         if (isNaN(result.port)) {
             delete result.port;
         }
+        result.database.uri = "mongodb://localhost:27017/" + result.database.uri;
         callback(null, result);
     });
 }
@@ -61,10 +62,11 @@ switch (process.argv[2]) {
     case "init":
         Logger.log(Couleurs.fg("Welcome to Bloggify! First of all we have to set some configurations here.", "#f1c40f"), "info");
         getUserConf(function (err, conf) {
-            console.log(err || conf);
             if (err) { return Logger.log(err, "error"); }
-            return
-            handler("init", [process.cwd()])
+            handler("init", [{
+                dest: process.cwd()
+              , conf: conf
+            }])
         });
         break;
     case "install":
