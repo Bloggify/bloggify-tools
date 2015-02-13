@@ -4,11 +4,21 @@ var Bloggify = require("../lib")
   ;
 
 Logger.config.displayDate = false;
+Logger.config.logLevel = 4;
 
 switch (process.argv[2]) {
     case "init":
         Bloggify.init(process.cwd(), function (err, data) {
-
+            if (err) { return Logger.log(err, "error"); }
+        }).on("progress", function (data) {
+            Logger.log(data.content, data.type);
+        });
+        break;
+    case "install":
+        Bloggify.install(function (err, data) {
+            if (err) { return Logger.log(err, "error"); }
+        }).on("progress", function (data) {
+            Logger.log(data.content, data.type);
         });
         break;
 }
