@@ -3,11 +3,18 @@
 // Dependencies
 var Bloggify = require("../lib")
   , Logger = require("bug-killer")
+  , Prompt = require("prompt")
+  , ConfigSchema = require("./config-schema")
+  , Couleurs = require("couleurs")()
   ;
 
 // Configurations
 Logger.config.displayDate = false;
 Logger.config.logLevel = 4;
+
+Prompt.start();
+Prompt.message = "";
+Prompt.delimiter = "";
 
 /**
  * handler
@@ -30,10 +37,35 @@ function handler(name, args) {
 
 }
 
+/**
+ * getUserConf
+ *
+ * @name getUserConf
+ * @function
+ * @param {Function} callback The callback function.
+ * @return {undefined}
+ */
+function getUserConf(callback) {
+    Prompt.get(ConfigSchema, function (err, result) {
+        if (err) { return callback(err); }
+        result.port = parseInt(result.port);
+        if (isNaN(result.port)) {
+            delete result.port;
+        }
+        callback(null, result);
+    });
+}
+
 // Options
 switch (process.argv[2]) {
     case "init":
-        handler("init", [process.cwd()])
+        Logger.log(Couleurs.fg("Welcome to Bloggify! First of all we have to set some configurations here.", "#f1c40f"), "info");
+        getUserConf(function (err, conf) {
+            console.log(err || conf);
+            if (err) { return Logger.log(err, "error"); }
+            return
+            handler("init", [process.cwd()])
+        });
         break;
     case "install":
         handler("install");
