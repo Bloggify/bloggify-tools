@@ -1,11 +1,24 @@
 #!/usr/bin/env node
+
+// Dependencies
 var Bloggify = require("../lib")
   , Logger = require("bug-killer")
   ;
 
+// Configurations
 Logger.config.displayDate = false;
 Logger.config.logLevel = 4;
 
+/**
+ * handler
+ * Calls the Bloggify tools functions.
+ *
+ * @name handler
+ * @function
+ * @param {String} name The Bloggify Tools method.
+ * @param {Array} args An array with the arguments (default: `[]`).
+ * @return {undefined}
+ */
 function handler(name, args) {
     args = args || [];
     args.push(function (err, data) {
@@ -17,6 +30,7 @@ function handler(name, args) {
 
 }
 
+// Options
 switch (process.argv[2]) {
     case "init":
         handler("init", [process.cwd()])
