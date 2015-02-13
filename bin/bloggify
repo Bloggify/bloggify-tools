@@ -1,7 +1,14 @@
 #!/usr/bin/env node
-var Bloggify = require("../lib");
+var Bloggify = require("../lib")
+  , Logger = require("bug-killer")
+  ;
+
+Logger.config.displayDate = false;
 
 switch (process.argv[2]) {
     case "init":
+        Bloggify.init(process.cwd(), function (err, data) {
+
+        });
         break;
 }
