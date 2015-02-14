@@ -126,7 +126,7 @@ var ConfigSchema = module.exports = {
                   , message: "Please answer with y or n."
                   , _: {
                         description: {
-                            description: "Enter the RSS description."
+                            description: "Enter the RSS description:"
                         }
                     }
                 }
