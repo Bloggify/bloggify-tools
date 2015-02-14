@@ -1,0 +1,10 @@
+bloggify --help
+usage: bloggify [command]
+A set of tools for Bloggify administration.
+
+command:
+  init                    Inits a Bloggify website.
+  install                 Installs Bloggify, inside of the
+  -h --help               prints this output.
+
+Documentation can be found at https://github.com/Bloggify/bloggify-tools
