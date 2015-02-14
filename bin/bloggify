@@ -6,6 +6,7 @@ var Bloggify = require("../lib")
   , Prompt = require("prompt")
   , ConfigSchema = require("./config-schema")
   , Couleurs = require("couleurs")()
+  , Fs = require("fs")
   ;
 
 // Configurations
@@ -38,6 +39,122 @@ function handler(name, args) {
 }
 
 /**
+ * processPluginInfo
+ * This function will ask the user for plugin configurations.
+ *
+ * @name processPluginInfo
+ * @function
+ * @param {Object} conf The configuration object.
+ * @param {Function} callback The callback function.
+ * @return {undefined}
+ */
+function processPluginInfo(conf, callback) {
+
+    var plugins = []
+      , keys = Object.keys(conf.plugins)
+      ;
+
+    /**
+     * checkSeq
+     * Gets the configuration for the current plugin.
+     *
+     * @name checkSeq
+     * @function
+     * @param {Number} i The current index.
+     * @return {undefined}
+     */
+    function checkSeq(i) {
+
+        var c = keys[i];
+        if (!c) {
+            conf.plugins = plugins;
+            return callback(null, conf);
+        }
+
+        var cAnswer = conf.plugins[c]
+          , pluginSchema = ConfigSchema.properties.plugins.properties[c]._
+          ;
+
+        /**
+         * addPlugin
+         * Adds the plugin into the plugin list.
+         *
+         * @name addPlugin
+         * @function
+         * @param {Object|undefined} r The configuration object or `undefined`.
+         * @return {undefined}
+         */
+        function addPlugin(r) {
+            switch (c) {
+                case "dashboard":
+                    plugins = plugins.concat([{
+                        name: "article-tags"
+                      , source: "git@github.com:BloggifyPlugins/article-tags.git"
+                      , version: "2.0.0"
+                    }, {
+                        name: "_custom-client-files"
+                      , source: "git@github.com:BloggifyPlugins/custom-client-files.git"
+                      , version: "2.0.0"
+                    }, {
+                        name: "_api"
+                      , source: "git@github.com:IonicaBizau/api.git"
+                      , version: "master"
+                    }]);
+                    break;
+                case "contactForm":
+                    plugins.push({
+                        name: "contact-form"
+                      , source: "git@github.com:Bloggify/contact-form.git"
+                      , version: "2.0.0"
+                      , config: r
+                    });
+                    break;
+                case "lightbox":
+                    plugins.push({
+                        name: "lightbox"
+                      , source: "git@github.com:Bloggify/lightbox.git"
+                      , version: "2.0.0"
+                    });
+                    break;
+                case "rss":
+                    plugins.push({
+                        name: "rss"
+                      , source: "git@github.com:Bloggify/rss.git"
+                      , version: "master"
+                      , config: r
+                    });
+                    break;
+                case "social":
+                    plugins.push({
+                        name: "social"
+                      , source: "git@github.com:Bloggify/social.git"
+                      , version: "master"
+                    });
+                    break;
+            }
+        }
+
+        if (/y/i.test(cAnswer)) {
+            if (pluginSchema) {
+                Prompt.get({ properties: pluginSchema }, function (err, res) {
+                    if (err) { return callback(err); }
+                    addPlugin(res);
+                    checkSeq(i + 1);
+                });
+                return;
+            }
+            addPlugin();
+            checkSeq(i + 1);
+            return;
+        }
+
+        checkSeq(i + 1);
+    }
+
+    checkSeq(0);
+}
+
+/**
  * getUserConf
  *
  * @name getUserConf
@@ -53,7 +170,7 @@ function getUserConf(callback) {
             delete result.port;
         }
         result.database.uri = "mongodb://localhost:27017/" + result.database.uri;
-        callback(null, result);
+        processPluginInfo(result, callback);
     });
 }
 
@@ -71,5 +188,8 @@ switch (process.argv[2]) {
         break;
     case "install":
         handler("install");
+        break;
+    default:
+        console.log(Fs.readFileSync(__dirname + "/docs/help", "utf-8"));
         break;
 }
