@@ -1,6 +1,8 @@
 // Dependencies
 var Couleurs = require("couleurs")();
 
+const YES_OR_NO = /^y|n$/i;
+
 // Config schema
 var ConfigSchema = module.exports = {
     properties: {
@@ -59,6 +61,76 @@ var ConfigSchema = module.exports = {
         }
       , port: {
             description: "The server port (default: 8080):"
+        }
+      , plugins: {
+            properties: {
+                dashboard: {
+                    description: "Do you want to install the dashboard plugin?"
+                  , pattern: YES_OR_NO
+                  , message: "Please answer with y or n."
+                  , _: {
+                        username: {
+                            description: "Enter your dashboard username:"
+                          , required: true
+                        }
+                      , displayName: {
+                            description: "Enter your dashboard display name:"
+                          , required: true
+                        }
+                      , password: {
+                            description: "Enter your dashboard password:"
+                          , required: true
+                        }
+                    }
+                }
+              , contactForm: {
+                    description: "Do you want to install the contact form plugin?"
+                  , pattern: YES_OR_NO
+                  , message: "Please answer with y or n."
+                  , _: {
+                        mandrill_key: {
+                            description: "Insert your Mandrill API key:"
+                          , required: true
+                        }
+                      , contact_page: {
+                            description: "Enter the contact page:"
+                          , required: true
+                        }
+                      , contact: {
+                            properties: {
+                                email: {
+                                    description: "Enter your contact email address:"
+                                  , required: true
+                                }
+                              , email: {
+                                    description: "Enter your contact display name:"
+                                  , required: true
+                                }
+                            }
+                        }
+                    }
+                }
+              , lightbox: {
+                    description: "Do you want to install the contact lightbox plugin?"
+                  , pattern: YES_OR_NO
+                  , message: "Please answer with y or n."
+                }
+              , social: {
+                    description: "Do you want to install the social plugin?"
+                  , pattern: YES_OR_NO
+                  , message: "Please answer with y or n."
+                }
+              , rss: {
+                    description: "Do you want to install the  RSS plugin?"
+                  , pattern: YES_OR_NO
+                  , message: "Please answer with y or n."
+                  , _: {
+                        description: {
+                            description: "Enter the RSS description."
+                        }
+                    }
+                }
+            }
         }
     }
 };
