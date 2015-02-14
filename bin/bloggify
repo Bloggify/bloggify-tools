@@ -89,16 +89,21 @@ function processPluginInfo(conf, callback) {
                 case "dashboard":
                     plugins = plugins.concat([{
                         name: "article-tags"
-                      , source: "git@github.com:BloggifyPlugins/article-tags.git"
-                      , version: "2.0.0"
+                      , source: "git@github.com:Bloggify/article-tags.git"
+                      , version: "master"
                     }, {
-                        name: "_custom-client-files"
-                      , source: "git@github.com:BloggifyPlugins/custom-client-files.git"
-                      , version: "2.0.0"
+                        name: "custom-client-files"
+                      , source: "git@github.com:Bloggify/custom-client-files.git"
+                      , version: "master"
                     }, {
-                        name: "_api"
+                        name: "api"
                       , source: "git@github.com:IonicaBizau/api.git"
                       , version: "master"
+                    }, {
+                        name: "dashboard",
+                        source: "git@github.com:IonicaBizau/dashboard.git",
+                        version: "master",
+                        config: r
                     }]);
                     break;
                 case "contactForm":
@@ -138,6 +143,9 @@ function processPluginInfo(conf, callback) {
             if (pluginSchema) {
                 Prompt.get({ properties: pluginSchema }, function (err, res) {
                     if (err) { return callback(err); }
+                    if (c === "dashboard") {
+                        res = { users: [res] };
+                    }
                     addPlugin(res);
                     checkSeq(i + 1);
                 });
