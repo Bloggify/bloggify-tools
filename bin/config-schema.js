@@ -121,7 +121,7 @@ var ConfigSchema = module.exports = {
                   , message: "Please answer with y or n."
                 }
               , rss: {
-                    description: "Do you want to install the  RSS plugin?"
+                    description: "Do you want to install the RSS plugin?"
                   , pattern: YES_OR_NO
                   , message: "Please answer with y or n."
                   , _: {
