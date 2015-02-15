@@ -1,0 +1,37 @@
+{
+  "name": "bloggify-tools",
+  "version": "1.0.0",
+  "description": "A set of tools for Bloggify administration.",
+  "main": "lib/index.js",
+  "bin": {
+    "bloggify-tools": "config-schema.js"
+  },
+  "dependencies": {
+    "couleurs": "^3.0.0",
+    "bug-killer": "^1.0.0",
+    "fs-extra": "^0.16.3",
+    "gry": "^1.0.0",
+    "oargv": "^1.1.1",
+    "prompt": "^0.2.14",
+    "ul": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bloggify/bloggify-tools.git"
+  },
+  "keywords": [
+    "bloggify",
+    "tools",
+    "administration"
+  ],
+  "author": "Ionică Bizău <bizauionica@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bloggify/bloggify-tools/issues"
+  },
+  "homepage": "https://github.com/Bloggify/bloggify-tools"
+}
