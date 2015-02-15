@@ -4,7 +4,7 @@
   "description": "A set of tools for Bloggify administration.",
   "main": "lib/index.js",
   "bin": {
-    "bloggify-tools": "config-schema.js"
+    "bloggify": "./bin/bloggify"
   },
   "dependencies": {
     "couleurs": "^3.0.0",
