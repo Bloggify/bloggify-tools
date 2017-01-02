@@ -1,10 +1,9 @@
 {
   "bin": {
-    "bloggify": "./bin/bloggify",
     "bloggify-tools": "bin/bloggify-tools.js"
   },
   "name": "bloggify-tools",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A set of tools for Bloggify administration.",
   "main": "lib/index.js",
   "dependencies": {
