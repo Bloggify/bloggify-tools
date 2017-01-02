@@ -1,0 +1,6 @@
+ship-release publish -d ':sparkles: Make the CLI tool friendlier. :rocket:
+Features which have been added:
+ - Create a blog app
+ - Create a custom app
+ - Friendly workflow in terminal, using an interactive way.
+:fireworks:'

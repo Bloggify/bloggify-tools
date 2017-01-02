@@ -1,82 +1,63 @@
-# Bloggify Tools
-A set of tools for Bloggify administration.
 
-## Installation
+# `$ bloggify-tools`
+
+ [![Patreon](https://img.shields.io/badge/Support%20me%20on-Patreon-%23e6461a.svg)][patreon] [![PayPal](https://img.shields.io/badge/%24-paypal-f39c12.svg)][paypal-donations] [![AMA](https://img.shields.io/badge/ask%20me-anything-1abc9c.svg)](https://github.com/IonicaBizau/ama) [![Version](https://img.shields.io/npm/v/bloggify-tools.svg)](https://www.npmjs.com/package/bloggify-tools) [![Downloads](https://img.shields.io/npm/dt/bloggify-tools.svg)](https://www.npmjs.com/package/bloggify-tools) [![Get help on Codementor](https://cdn.codementor.io/badges/get_help_github.svg)](https://www.codementor.io/johnnyb?utm_source=github&utm_medium=button&utm_term=johnnyb&utm_campaign=github)
+
+> A set of tools for Bloggify administration.
+
+## :cloud: Installation
+
+You can install the package globally and use it as command line tool:
+
+
 ```sh
-$ npm install -g bloggify-tools
+$ npm i -g bloggify-tools
 ```
 
-## Usage
 
-```sh
-$ ./bin/bloggify --help
-bloggify --help
-usage: bloggify [command]
+Then, run `bloggify-tools --help` and see what the CLI tool can do.
+
+
+```
+$ bloggify-tools --help
+Usage: bloggify-tools [options]
+
 A set of tools for Bloggify administration.
 
-command:
-  init                    Inits a Bloggify website.
-  install                 Installs Bloggify, inside of the
-  -h --help               prints this output.
+Options:
+  -v, --version  Displays version information.
+  -h, --help     Displays this help.
 
-Documentation can be found at https://github.com/Bloggify/bloggify-tools
+Documentation can be found at https://github.com/Bloggify/bloggify-tools.
 ```
 
-## Documentation
-### `BloggifyTools()`
-Creates a new instance of `BloggifyTools`.
+## :memo: Documentation
 
-### `init(options, callback)`
-Inits the Bloggify framework in the destination path.
+For full API reference, see the [DOCUMENTATION.md][docs] file.
 
-#### Params
-- **Options** `options`: A string representing the destination path or an object:
- - `dest` (String): The destination path.
- - `name` (String): The folder name.
- - `conf` (Object): The configuration object.
-
-- **Function** `callback`: The callback function.
-
-#### Return
-- **EventEmitter** An event emitter which can be used for logging progress things.
-
-### `npmInstall(callback)`
-Installs the dependencies.
-
-#### Params
-- **Function** `callback`: The callback function.
-
-### `initConfig(options, callback)`
-Inits the configuration file.
-
-#### Params
-- **Options** `options`: The options object.
-- **Function** `callback`: The callback function.
-
-### `install(callback)`
-This function will:
- - download or init the content directory
- - download or init the theme directory
-
-#### Params
-- **Function** `callback`: The callback function.
-
-### `initContentDir(callback)`
-Inits the content directory.
-
-#### Params
-- **Function** `callback`: The callback function.
+## :yum: How to contribute
+Have an idea? Found a bug? See [how to contribute][contributing].
 
 
-## How to contribute
-1. File an issue in the repository, using the bug tracker, describing the
-   contribution you'd like to make. This will help us to get you started on the
-   right foot.
-2. Fork the project in your account and create a new branch:
-   `your-great-feature`.
-3. Commit your changes in that branch.
-4. Open a pull request, and reference the initial issue in the pull request
-   message.
+## :moneybag: Donations
 
-## License
-See the [LICENSE](./LICENSE) file.
+Another way to support the development of my open-source modules is
+to [set up a recurring donation, via Patreon][patreon]. :rocket:
+
+[PayPal donations][paypal-donations] are appreciated too! Each dollar helps.
+
+Thanks! :heart:
+
+
+## :scroll: License
+
+[MIT][license] © [Ionică Bizău][website]
+
+[patreon]: https://www.patreon.com/ionicabizau
+[paypal-donations]: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RVXDDLKKLQRJW
+[donate-now]: http://i.imgur.com/6cMbHOC.png
+
+[license]: http://showalicense.com/?fullname=Ionic%C4%83%20Biz%C4%83u%20%3Cbizauionica%40gmail.com%3E&year=2015#license-mit
+[website]:
+[contributing]: /CONTRIBUTING.md
+[docs]: /DOCUMENTATION.md
