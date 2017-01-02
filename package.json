@@ -4,7 +4,7 @@
   },
   "name": "bloggify-tools",
   "version": "2.0.1",
-  "description": "A set of tools for Bloggify administration.",
+  "description": "Interactive command line tool to help you win at Bloggify.",
   "main": "lib/index.js",
   "dependencies": {
     "bug-killer": "^1.0.0",
@@ -41,6 +41,9 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Bloggify/bloggify-tools/issues"
+  },
+  "blah": {
+    "ex_img": "http://i.imgur.com/Fg9iTBZ.png"
   },
   "homepage": "https://github.com/Bloggify/bloggify-tools"
 }

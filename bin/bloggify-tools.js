@@ -26,7 +26,7 @@ new Tilda(`${__dirname}/../package.json`).main(action => {
                   , value: "blog"
                 }
               , {
-                    name: "Create custom application"
+                    name: "Create a custom application"
                   , value: "custom-app"
                 }
               , {
