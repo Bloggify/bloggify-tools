@@ -64,7 +64,7 @@ new Tilda(`${__dirname}/../package.json`).main(action => {
                             type: "input",
                             name: "git_url",
                             default: () => answers.main === "custom-app" ? "https://github.com/BloggifyTutorials/custom-app" : "https://github.com/Bloggify/bloggify-quick-start.git",
-                            message: "Git url"
+                            message: "Application Template"
                         },
                         {
                             type: "input",
