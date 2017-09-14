@@ -6,6 +6,7 @@ You can see below the API reference of this module.
 Inits a new Bloggify app in the destination path.
 
 #### Params
+
 - **Options** `options`: A string representing the destination path or an object:
  - `title` (String): The app title.
  - `description` (String): The app description.
