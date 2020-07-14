@@ -7,21 +7,21 @@
   "description": "Interactive command line tool to help you win at Bloggify.",
   "main": "lib/index.js",
   "dependencies": {
-    "bug-killer": "^1.0.0",
-    "couleurs": "^3.0.0",
+    "bug-killer": "^4.4.4",
+    "couleurs": "^6.0.10",
     "edit-json-file": "^1.0.1",
     "emoji-logger": "^1.0.5",
-    "execa": "^0.5.0",
-    "fs-extra": "^0.16.3",
-    "fullname": "^3.2.0",
-    "gry": "^1.0.0",
-    "inquirer": "^2.0.0",
-    "listr": "^0.9.0",
-    "oargv": "^1.1.1",
-    "prompt": "^0.2.14",
-    "slug": "^0.9.1",
+    "execa": "^4.0.3",
+    "fs-extra": "^9.0.1",
+    "fullname": "^4.0.1",
+    "gry": "^6.0.0",
+    "inquirer": "^7.3.2",
+    "listr": "^0.14.3",
+    "oargv": "^3.4.9",
+    "prompt": "^1.0.0",
+    "slug": "^3.3.0",
     "tilda": "^4.4.4",
-    "ul": "^1.1.0",
+    "ul": "^5.2.14",
     "write-file-p": "^1.0.3"
   },
   "devDependencies": {},
@@ -37,7 +37,7 @@
     "tools",
     "administration"
   ],
-  "author": "Ionică Bizău <bizauionica@gmail.com>",
+  "author": "Bloggify <support@bloggify.org> (https://bloggify.org)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Bloggify/bloggify-tools/issues"
@@ -45,5 +45,20 @@
   "blah": {
     "ex_img": "http://i.imgur.com/Fg9iTBZ.png"
   },
-  "homepage": "https://github.com/Bloggify/bloggify-tools"
+  "homepage": "https://github.com/Bloggify/bloggify-tools",
+  "files": [
+    "bin/",
+    "app/",
+    "lib/",
+    "dist/",
+    "src/",
+    "scripts/",
+    "resources/",
+    "menu/",
+    "cli.js",
+    "index.js",
+    "bloggify.js",
+    "bloggify.json",
+    "bloggify/"
+  ]
 }
