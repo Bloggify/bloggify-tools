@@ -59,19 +59,34 @@ new Tilda(`${__dirname}/../package.json`).main(action => {
               , value: "application-functions"
               , choices: [
                     {
-                        name: "Start my app"
-                      , value: "start"
-                      , disabled: true
+                        name: "Start Application"
+                      , value: "application-start"
+                      , choices: [
+                            {
+                                name: "Development"
+                              , value: "application-start-development"
+                            }
+                          , {
+                                name: "Debug"
+                              , value: "application-start-debug"
+                            }
+                          , {
+                                name: "Production"
+                              , value: "application-start-production"
+                            }
+                          , {
+                                name: "« Back",
+                                value: "_back"
+                            }
+                        ]
                     }
                   , {
-                        name: "Install a plugin"
-                      , value: "install-plugin"
-                      , disabled: true
+                        name: "Bundle Assets"
+                      , value: "application-bundle"
                     }
                   , {
-                        name: "Uninstall a plugin"
-                      , value: "uninstall-plugin"
-                      , disabled: true
+                        name: "Database Connect"
+                      , value: "database-connect"
                     }
                   , {
                         name: "« Back",
@@ -174,11 +189,25 @@ new Tilda(`${__dirname}/../package.json`).main(action => {
                     Bloggify.init(answers);
                 });
                 break;
-            case "start":
+
+            case "application-start-development":
+                Bloggify.applicationStart(Bloggify.APP_MODES.DEVELOPMENT)
                 break;
-            case "install-plugin":
+
+            case "application-start-debug":
+                Bloggify.applicationStart(Bloggify.APP_MODES.DEBUG)
                 break;
-            case "uninstall-plugin":
+
+            case "application-start-production":
+                Bloggify.applicationStart(Bloggify.APP_MODES.PRODUCTION)
+                break;
+
+            case "database-connect":
+                Bloggify.databaseConnect()
+                break;
+
+            case "application-bundle":
+                Bloggify.applicationBundle()
                 break;
 
             // Migrations
