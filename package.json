@@ -3,7 +3,7 @@
     "bloggify-tools": "bin/bloggify-tools.js"
   },
   "name": "bloggify-tools",
-  "version": "3.1.1",
+  "version": "3.2.0",
   "description": "Interactive command line tool to help you win at Bloggify.",
   "main": "lib/index.js",
   "dependencies": {
