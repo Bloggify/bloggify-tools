@@ -10,7 +10,7 @@ const Tilda = require("tilda")
     , log = require("emoji-logger")
     ;
 
-new Tilda(`${__dirname}/../package.json`).main(action => {
+new Tilda(`${__dirname}/../package.json`).main(async action => {
     const MAIN_MENU = {
         title: "What do you want to do?",
         choices: [
@@ -29,6 +29,10 @@ new Tilda(`${__dirname}/../package.json`).main(action => {
                   , {
                         name: "Create a custom application"
                       , value: "custom-app"
+                    }
+                  , {
+                        name: "Create a custom application with Sqlite database"
+                      , value: "custom-app-sqlite"
                     }
                   , {
                         name: "« Back",
@@ -135,96 +139,112 @@ new Tilda(`${__dirname}/../package.json`).main(action => {
         } while (true)
     }
 
-    processMenu().then(answer => {
-        switch (answer) {
-            case "blog":
-            case "personal-blog":
-            case "custom-app":
-                log("So, you want to create a new Bloggify app! Cool. Please answer the following questions. If you're happy with the defaults (the one in parentheses), just press the return key.", "info");
-                fullname().then(userFullName=> {
-                    let questions = [
-                        answer !== "custom-app" ? {
-                            type: "input",
-                            name: "full_name",
-                            default: () => userFullName,
-                            message: answer === "personal-blog" ? "Your name" : "Your friend's name"
-                        } : null,
-                        {
-                            type: "input",
-                            name: "git_url",
-                            default: () => answer === "custom-app" ? "https://github.com/BloggifyTutorials/custom-app" : "https://github.com/Bloggify/bloggify-quick-start.git",
-                            message: "Application Template"
-                        },
-                        {
-                            type: "input",
-                            name: "title",
-                            default: answs => /blog/.test(answer) ? answs.full_name : "Custom App",
-                            message: "Website title"
-                        },
-                        {
-                            type: "input",
-                            name: "description",
-                            message: "Website description",
-                            default: answs => `${/blog/.test(answer) ? answs.full_name + "'s Blog" : "My fancy Bloggify app."}`
-                        },
-                        answer !== "custom-app" ? {
-                            type: "input",
-                            name: "theme",
-                            message: "Website theme",
-                            default: () => `bloggify-theme-light`
-                        } : null,
-                        {
-                            type: "input",
-                            name: "domain",
-                            message: "Production url",
-                            default (answers) {
-                                return `http://${slug(answers.title, { lower: true })}.com`;
-                            }
-                            // TODO Validation
-                        }
-                    ].filter(Boolean);
-                    return inquirer.prompt(questions);
-                }).then(answers => {
-                    answers.dir = slug(answers.title, { lower: true });
-                    Bloggify.init(answers);
-                });
-                break;
+    const answer = await processMenu()
+    switch (answer) {
+        case "blog":
+        case "personal-blog":
+        case "custom-app":
+        case "custom-app-sqlite":
+            log("So, you want to create a new Bloggify app! Cool. Please answer the following questions. If you're happy with the defaults (the one in parentheses), just press the return key.", "info");
+            const userFullName = await fullname()
+            const isCustom = answer.includes("custom-app")
+            const defaultGitUrl = ({
+                "custom-app": "https://github.com/BloggifyTutorials/custom-app",
+                "custom-app-sqlite": "https://github.com/BloggifyTutorials/custom-app-sqlite",
+                "personal-blog": "https://github.com/Bloggify/bloggify-quick-start.git",
+                "blog": "https://github.com/Bloggify/bloggify-quick-start.git"
+            })[answer]
 
-            case "application-start-development":
-                Bloggify.applicationStart(Bloggify.APP_MODES.DEVELOPMENT)
-                break;
+            let questions = [
 
-            case "application-start-debug":
-                Bloggify.applicationStart(Bloggify.APP_MODES.DEBUG)
-                break;
-
-            case "application-start-production":
-                Bloggify.applicationStart(Bloggify.APP_MODES.PRODUCTION)
-                break;
-
-            case "database-connect":
-                Bloggify.databaseConnect()
-                break;
-
-            case "application-bundle":
-                Bloggify.applicationBundle()
-                break;
-
-            // Migrations
-            case "run-migrations":
-                Bloggify.runMigrations()
-                break;
-
-            // Migrations
-            case "create-migration":
-                inquirer.prompt([{
+                // Get the fullname
+                !isCustom ? {
                     type: "input",
-                    name: "migration_name",
-                    message: "Migration name"
-                }]).then(({ migration_name }) => {
-                    Bloggify.createMigration(migration_name)
-                })
-                break;
-        }
-    });
+                    name: "full_name",
+                    default: () => userFullName,
+                    message: answer === "personal-blog" ? "Your name" : "Your friend's name"
+                } : null,
+
+                // Set the template git url
+                {
+                    type: "input",
+                    name: "git_url",
+                    default: () => defaultGitUrl,
+                    message: "Application Template"
+                },
+
+                // App title
+                {
+                    type: "input",
+                    name: "title",
+                    default: answs => /blog/.test(answer) ? answs.full_name : "Custom App",
+                    message: "Website title"
+                },
+
+                // App description
+                {
+                    type: "input",
+                    name: "description",
+                    message: "Website description",
+                    default: answs => `${/blog/.test(answer) ? answs.full_name + "'s Blog" : "My fancy Bloggify app."}`
+                },
+
+                // Theme
+                !isCustom ? {
+                    type: "input",
+                    name: "theme",
+                    message: "Website theme",
+                    default: () => `bloggify-theme-light`
+                } : null,
+
+                // Production Url
+                {
+                    type: "input",
+                    name: "domain",
+                    message: "Production url",
+                    default (answers) {
+                        return `https://${slug(answers.title, { lower: true })}.com`;
+                    }
+                    // TODO Validation
+                }
+            ].filter(Boolean);
+            const answers = await inquirer.prompt(questions);
+            answers.dir = slug(answers.title, { lower: true });
+            Bloggify.init(answers);
+            break;
+        case "application-start-development":
+            Bloggify.applicationStart(Bloggify.APP_MODES.DEVELOPMENT)
+            break;
+
+        case "application-start-debug":
+            Bloggify.applicationStart(Bloggify.APP_MODES.DEBUG)
+            break;
+
+        case "application-start-production":
+            Bloggify.applicationStart(Bloggify.APP_MODES.PRODUCTION)
+            break;
+
+        case "database-connect":
+            Bloggify.databaseConnect()
+            break;
+
+        case "application-bundle":
+            Bloggify.applicationBundle()
+            break;
+
+        // Migrations
+        case "run-migrations":
+            Bloggify.runMigrations()
+            break;
+
+        // Migrations
+        case "create-migration":
+            const { migration_name } = await inquirer.prompt([{
+                type: "input",
+                name: "migration_name",
+                message: "Migration name"
+            }])
+            Bloggify.createMigration(migration_name)
+            break;
+    }
 });
