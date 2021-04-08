@@ -71,8 +71,8 @@ Usage: bloggify-tools [options]
 Interactive command line tool to help you win at Bloggify.
 
 Options:
-  -h, --help     Displays this help.
   -v, --version  Displays version information.
+  -h, --help     Displays this help.
 
 Documentation can be found at https://github.com/Bloggify/bloggify-tools.
 ```
