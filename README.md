@@ -71,8 +71,8 @@ Usage: bloggify-tools [options]
 Interactive command line tool to help you win at Bloggify.
 
 Options:
-  -v, --version  Displays version information.
   -h, --help     Displays this help.
+  -v, --version  Displays version information.
 
 Documentation can be found at https://github.com/Bloggify/bloggify-tools.
 ```
@@ -98,6 +98,16 @@ Documentation can be found at https://github.com/Bloggify/bloggify-tools.
 
 
 
+## :memo: Documentation
+
+For full API reference, see the [DOCUMENTATION.md][docs] file.
+
+
+
+
+
+
+
 ## :question: Get Help
 
 There are few ways to get help:
@@ -108,12 +118,6 @@ There are few ways to get help:
  2. For bug reports and feature requests, open issues. :bug:
 
 
-
-
-
-## :memo: Documentation
-
-For full API reference, see the [DOCUMENTATION.md][docs] file.
 
 
 
