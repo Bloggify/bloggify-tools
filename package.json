@@ -12,19 +12,19 @@
     "dotenv": "^16.5.0",
     "edit-json-file": "^1.0.1",
     "emoji-logger": "^1.0.5",
-    "execa": "^4.0.3",
-    "fs-extra": "^9.0.1",
-    "fullname": "^4.0.1",
+    "fullname": "^5.0.0",
     "gry": "^6.0.0",
-    "inquirer": "^7.3.2",
+    "inquirer": "^12.6.3",
+    "is-there": "^4.5.2",
     "listr": "^0.14.3",
     "oargv": "^3.4.9",
-    "parse-db-uri": "^1.0.4",
+    "parse-db-uri": "^2.1.2",
     "prompt": "^1.0.0",
-    "slug": "^3.3.0",
+    "slugly": "^1.0.5",
+    "spawno": "^2.1.2",
     "tilda": "^4.4.4",
     "ul": "^5.2.14",
-    "write-file-p": "^1.0.3"
+    "write-file-p": "^1.0.9"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

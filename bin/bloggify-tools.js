@@ -4,9 +4,9 @@
 // Dependencies
 const Tilda = require("tilda")
     , Bloggify = require("..")
-    , inquirer = require("inquirer")
-    , fullname = require("fullname")
-    , slug = require("slug")
+    , inquirer = require("inquirer").default
+    , fullname = require("fullname").default
+    , slug = require("slugly")
     , log = require("emoji-logger")
     ;
 
